@@ -3,12 +3,12 @@ import '../widgets/widgets.dart';
 
 enum SampleItem2 { itemOne, itemTwo, itemThree }
 
-class HomeScreen2 extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  State<HomeScreen2> createState() => _HomeScreen2State();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreen2State extends State<HomeScreen2> {
+class _HomeScreenState extends State<HomeScreen> {
   //variable menú desplegable
   SampleItem2? selectedMenu;
 
