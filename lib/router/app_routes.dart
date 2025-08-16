@@ -10,7 +10,7 @@ class AppRoutes {
     MenuOption(
         route: 'home',
         name: 'Home Screen',
-        screen: HomeScreen(),
+        screen: () => HomeScreen(),
         icon: Icons.home)
   ];
 
@@ -18,13 +18,11 @@ class AppRoutes {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
 
     for (final option in menuOptions) {
-      appRoutes.addAll({option.route: (BuildContext context) => option.screen});
+      appRoutes.addAll({
+        option.route: (BuildContext context) => option.screen(),
+      });
     }
 
     return appRoutes;
-  }
-
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    return MaterialPageRoute(builder: (context) => const AlertScreen());
   }
 }
