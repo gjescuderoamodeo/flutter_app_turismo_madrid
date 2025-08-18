@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/widgets.dart';
+import 'package:flutter_app_turismo_madrid/screens/sitios_screen.dart';
 
 enum SampleItem2 { itemOne, itemTwo, itemThree }
 
@@ -45,7 +45,7 @@ class _HomeBody extends StatelessWidget {
       child: Column(
         children: [
           // Titulos
-          PageTitle(),
+          SitiosScreen(),
           // Card Table
           //CardTable2(),
         ],
