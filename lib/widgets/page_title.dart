@@ -8,7 +8,7 @@ class PageTitle extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //poner aquí logo
             Text('Guia viaje madrid',
