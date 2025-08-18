@@ -3,16 +3,16 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/models.dart';
 
 Future<List<Sitio>> loadSitios() async {
-  final String jsonString =
-      await rootBundle.loadString('assets/data/sitios.json');
-  final List<dynamic> jsonData = json.decode(jsonString);
+  final data = await rootBundle.loadString('assets/data/sitios.json');
+  final jsonResult = jsonDecode(data) as List<dynamic>;
 
-  return jsonData
-      .map((item) => Sitio(
-            nombre: item['nombre'],
-            ubicacion: item['ubicacion'],
-            horario: item['horario'],
-            comerCercano: item['comerCercano'],
-          ))
-      .toList();
+  List<Sitio> sitios = [];
+  for (var item in jsonResult) {
+    try {
+      sitios.add(Sitio.fromJson(item));
+    } catch (e) {
+      print('Error al parsear sitio: $item -> $e');
+    }
+  }
+  return sitios;
 }

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_turismo_madrid/screens/sitios_screen.dart';
 
-enum SampleItem2 { itemOne, itemTwo, itemThree }
-
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //variable menú desplegable
-  SampleItem2? selectedMenu;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,34 +16,51 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text(
           "Viaje madrid",
           style: TextStyle(
-              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          // Background
-          //Background(),
-          // Home Body
-          _HomeBody()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Título de la página
+            const PageTitle(),
+            const SizedBox(height: 20),
+            // Lista de sitios
+            SitiosScreen(),
+          ],
+        ),
       ),
-      //bottomNavigationBar: CustomBottomNavigation(),
     );
   }
 }
 
-class _HomeBody extends StatelessWidget {
+class PageTitle extends StatelessWidget {
+  const PageTitle({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          // Titulos
-          SitiosScreen(),
-          // Card Table
-          //CardTable2(),
-        ],
+    return SafeArea(
+      bottom: false,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Guía viaje Madrid',
+              style: TextStyle(
+                fontSize: 33,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
