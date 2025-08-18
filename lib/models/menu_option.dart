@@ -4,7 +4,7 @@ class MenuOption {
   final String route;
   final IconData icon;
   final String name;
-  final Widget Function() screen;
+  final Widget screen;
 
   MenuOption(
       {required this.route,
