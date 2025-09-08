@@ -22,7 +22,7 @@ class _SitiosScreenState extends State<SitiosScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final tableHeight = MediaQuery.of(context).size.height * 0.5;
+    final tableHeight = MediaQuery.of(context).size.height * 0.8;
 
     return sitios == null
         ? const Center(child: CircularProgressIndicator())
