@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../services/sitio_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SitiosScreen extends StatefulWidget {
   @override
@@ -20,6 +21,18 @@ class _SitiosScreenState extends State<SitiosScreen> {
     });
   }
 
+  // función auxiliar para abrir enlaces
+  Future<void> _abrirEnlace(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No se pudo abrir el enlace')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final tableHeight = MediaQuery.of(context).size.height * 0.8;
@@ -32,7 +45,16 @@ class _SitiosScreenState extends State<SitiosScreen> {
               scrollDirection: Axis.vertical,
               child: DataTable(
                 columns: const [
-                  DataColumn(label: Text('Nombre del sitio')),
+                  DataColumn(
+                    label: Text(
+                      'Nombre del sitio',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.purple,
+                      ),
+                    ),
+                  ),
                 ],
                 rows: sitios!.map((sitio) {
                   return DataRow(
@@ -48,7 +70,19 @@ class _SitiosScreenState extends State<SitiosScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Ubicación: ${sitio.ubicacion}'),
+                                  // Enlace clicable
+                                  GestureDetector(
+                                    onTap: () => _abrirEnlace(sitio.ubicacion),
+                                    child: const Text(
+                                      'Ver ubicación',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.blue,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
                                   Text('Horario: ${sitio.horario}'),
                                   Text('Comer cercano: ${sitio.comerCercano}'),
                                 ],
